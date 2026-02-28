@@ -100,6 +100,13 @@ func _spawn_enemy() -> void:
     var x = randf_range(-spawn_width/2, spawn_width/2)
     var y = randf_range(80, spawn_depth)
     en.position = Vector2(x, y)
+    # set player path for enemy to reference
+    if en.has_method("set"):
+        # try to set a player_path property if exported
+        if en.has_variable("player_path"):
+            en.player_path = player.get_path()
+    elif en.has_variable("player_path"):
+        en.player_path = player.get_path()
     enemies_container.add_child(en)
 
 func _on_collected(amount: int) -> void:
