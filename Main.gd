@@ -14,6 +14,22 @@ func _ready() -> void:
     set_process(true)
     sell_button.pressed.connect(Callable(self, "_on_sell_pressed"))
     upgrade_button.pressed.connect(Callable(self, "_on_upgrade_pressed"))
+    # load audio streams
+    var collect_path = "res://audio/collect.wav"
+    var bubble_path = "res://audio/bubble.wav"
+    var surface_path = "res://audio/surface.wav"
+    if ResourceLoader.exists(collect_path):
+        var s = load(collect_path)
+        if has_node("CollectSound"):
+            $CollectSound.stream = s
+    if ResourceLoader.exists(bubble_path):
+        var b = load(bubble_path)
+        if has_node("BubbleSound"):
+            $BubbleSound.stream = b
+    if ResourceLoader.exists(surface_path):
+        var su = load(surface_path)
+        if has_node("SurfaceSound"):
+            $SurfaceSound.stream = su
 
 func _process(delta: float) -> void:
     if player:

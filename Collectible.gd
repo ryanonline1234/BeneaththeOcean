@@ -26,6 +26,12 @@ func _process(delta: float) -> void:
 func _collect() -> void:
     if player and player.has_method("add_currency"):
         player.call("add_currency", value)
+    # play collect sound if present
+    var root = get_tree().get_current_scene()
+    if root and root.has_node("CollectSound"):
+        var s = root.get_node("CollectSound")
+        if s and s is AudioStreamPlayer:
+            s.play()
     # pop animation: scale up and fade then free
     var tween = create_tween()
     tween.tween_property(self, "scale", Vector2(1.6,1.6), 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
