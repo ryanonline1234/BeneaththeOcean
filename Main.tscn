@@ -36,6 +36,30 @@ position = Vector2(8,8)
 text = "$0"
 position = Vector2(8,28)
 
+[node name="ShopPanel" type="Panel" parent="UI" unique_id=20]
+visible = false
+rect_position = Vector2(220,8)
+rect_size = Vector2(180,84)
+
+[node name="SellButton" type="Button" parent="UI/ShopPanel" unique_id=21]
+text = "Sell"
+rect_position = Vector2(8,8)
+
+[node name="UpgradeButton" type="Button" parent="UI/ShopPanel" unique_id=22]
+text = "Upgrade O2 (20)"
+rect_position = Vector2(8,40)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=30]
+color = Color(1,1,1,1)
+
+[node name="LightOverlay" type="ColorRect" parent="." unique_id=31]
+rect_min_size = Vector2(800,600)
+color = Color(0,0,0,0)
+material = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+
 [node name="GameManager" type="Node" parent="." unique_id=11]
 script = ExtResource( 4 )
 collectible_scene = ExtResource( 5 )

@@ -41,12 +41,29 @@ func _on_player_surfaced() -> void:
     if not player: return
     var ppos = player.position
     if abs(ppos.x) < 60:
+        # surface dock: open shop UI by toggling UI/ShopPanel
+        var ui = get_tree().get_root().get_node_or_null("/root/Main/UI")
+        # simpler: toggle the panel under Main
+        var main = get_node("../")
+        var shop = main.get_node("UI/ShopPanel") if main.has_node("UI/ShopPanel") else null
+        if shop:
+            shop.visible = true
         _sell_all()
 
-func _sell_all() -> void:
-    if not player: return
+func sell_all() -> int:
+    if not player: return 0
     var gained = player.currency
     player.currency = 0
     if gained > 0:
         player.oxygen_max += int(gained / 20) * 2
         player.oxygen = player.oxygen_max
+    return gained
+
+func upgrade_oxygen(cost: int) -> bool:
+    if not player: return false
+    if player.currency < cost:
+        return false
+    player.currency -= cost
+    player.oxygen_max += 2
+    player.oxygen = player.oxygen_max
+    return true

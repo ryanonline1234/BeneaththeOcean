@@ -26,8 +26,10 @@ func _process(delta: float) -> void:
 func _collect() -> void:
     if player and player.has_method("add_currency"):
         player.call("add_currency", value)
-    # simple pop effect could be added here (tween), but free for now
-    queue_free()
+    # pop animation: scale up and fade then free
+    var tween = create_tween()
+    tween.tween_property(self, "scale", Vector2(1.6,1.6), 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+    tween.tween_callback(Callable(self, "queue_free")).set_delay(0.02)
 
 func _draw() -> void:
     draw_circle(Vector2.ZERO, radius, color)
