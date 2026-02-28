@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://collectiblescene"]
+
+[ext_resource path="res://Collectible.gd" type="Script" id=1]
+
+[node name="Collectible" type="Node2D" unique_id=123456]
+script = ExtResource( 1 )
