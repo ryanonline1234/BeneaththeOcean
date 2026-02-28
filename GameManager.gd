@@ -11,6 +11,11 @@ extends Node
 
 onready var player := get_node_or_null(player_path)
 onready var container := get_node_or_null("World/CollectibleContainer")
+onready var enemies_container := get_node_or_null("World/Enemies")
+
+@export var enemy_scene: PackedScene = preload("res://Enemy.tscn")
+@export var enemy_spawn_interval := 10.0
+var _time_since_enemy := 0.0
 
 var _time_since_rare := 0.0
 var _time_since_dolphin := 0.0
@@ -35,6 +40,25 @@ func _process(delta: float) -> void:
     if _time_since_dolphin >= dolphin_spawn_interval:
         _time_since_dolphin = 0.0
         _spawn_dolphin()
+    _time_since_enemy += delta
+    if _time_since_enemy >= enemy_spawn_interval:
+        _time_since_enemy = 0.0
+        _spawn_enemy()
+    # check enemy proximity to player and apply damage cooldowns
+    if enemies_container and player:
+        for e in enemies_container.get_children():
+            if not e: continue
+            var dist = e.position.distance_to(player.position)
+            var now = OS.get_ticks_msec() / 1000.0
+            if dist < 28 and now - e.last_hit > e.hit_cooldown:
+                # damage player oxygen
+                if player.has_method("add_currency"):
+                    # knockback
+                    player.position += Vector2(sign(player.position.x - e.position.x) * 16, -8)
+                if player.has_method("_force_surface"):
+                    # reduce oxygen by 2 seconds
+                    player.oxygen = max(0, player.oxygen - 2.0)
+                e.last_hit = now
 
 func _spawn_initial() -> void:
     for i in range(initial_spawn):
@@ -68,6 +92,15 @@ func _spawn_dolphin() -> void:
     if target:
         d.target = target.get_path()
     get_node("World").add_child(d)
+
+func _spawn_enemy() -> void:
+    if enemies_container == null:
+        enemies_container = get_node("World").get_node("Enemies")
+    var en = enemy_scene.instantiate()
+    var x = randf_range(-spawn_width/2, spawn_width/2)
+    var y = randf_range(80, spawn_depth)
+    en.position = Vector2(x, y)
+    enemies_container.add_child(en)
 
 func _on_collected(amount: int) -> void:
     # placeholder for future logic

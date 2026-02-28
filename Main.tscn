@@ -27,6 +27,8 @@ script = ExtResource( 7 )
 
 [node name="CollectibleContainer" type="Node2D" parent="World" unique_id=6]
 
+[node name="Enemies" type="Node2D" parent="World" unique_id=60]
+
 [node name="Seabed" type="Node2D" parent="World" unique_id=7]
 script = ExtResource( 3 )
 
