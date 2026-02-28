@@ -5,6 +5,8 @@
 [ext_resource path="res://Seabed.gd" type="Script" id=3]
 [ext_resource path="res://GameManager.gd" type="Script" id=4]
 [ext_resource path="res://Collectible.tscn" type="PackedScene" id=5]
+[ext_resource path="res://diver_light.shader" type="Shader" id=6]
+[ext_resource path="res://BubbleSpawner.gd" type="Script" id=7]
 
 [node name="Main" type="Node2D" unique_id=1]
 script = ExtResource( 1 )
@@ -20,6 +22,8 @@ limit_bottom = 800
 
 [node name="Player" type="Node2D" parent="World" unique_id=5]
 script = ExtResource( 2 )
+[node name="BubbleSpawner" type="Node2D" parent="World/Player" unique_id=50]
+script = ExtResource( 7 )
 
 [node name="CollectibleContainer" type="Node2D" parent="World" unique_id=6]
 

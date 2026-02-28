@@ -14,8 +14,12 @@ func _process(delta: float) -> void:
 
 func _spawn_burst() -> void:
     for i in range(burst_count):
-        var b = Node2D.new()
-        # instantiate Bubble.gd as a script node
         var bubble = load("res://Bubble.gd").new()
         bubble.position = Vector2(randf_range(-6,6), randf_range(-6,6))
         add_child(bubble)
+        # play bubble sound if available on root
+        var root = get_tree().get_current_scene()
+        if root and root.has_node("BubbleSound"):
+            var bs = root.get_node("BubbleSound")
+            if bs and bs is AudioStreamPlayer:
+                bs.play()
