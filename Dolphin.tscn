@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dolphinscene"]
+
+[ext_resource path="res://Dolphin.gd" type="Script" id=1]
+
+[node name="Dolphin" type="Node2D" unique_id=1234567]
+script = ExtResource( 1 )
