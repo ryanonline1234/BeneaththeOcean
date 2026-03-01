@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dvbvvy3q3phy"]
+
+[ext_resource type="PackedScene" uid="uid://ccuym7kn08uwx" path="res://Layers.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bjdwo0ncp518a" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dacyf0qjv0v4g" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cg7hy1j316c31" path="res://RedCrab.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cso6qqbnd32yf" path="res://boat.tscn" id="3_h2yge"]
+
+[node name="Node2D" type="Node2D" unique_id=127875977]
+script = ExtResource("1_lquwl")
+
+[node name="Map" parent="." unique_id=1694495829 instance=ExtResource("1_ig7tw")]
+
+[node name="Player" parent="." unique_id=393179645 instance=ExtResource("2_0xm2m")]
+position = Vector2(-117, -49)
+
+[node name="Boat" parent="." unique_id=1532197788 instance=ExtResource("3_h2yge")]
+position = Vector2(36, 32)
+scale = Vector2(0.194, 0.194)
+
+[node name="Crab" parent="." unique_id=1586692528 instance=ExtResource("2_7mycd")]
+position = Vector2(313, 517)

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bvtayxa54qo5v"]
+
+[ext_resource type="Texture2D" uid="uid://bab8mhaw8o2ix" path="res://Health_under.png" id="1_qtu10"]
+[ext_resource type="Texture2D" uid="uid://cb84ggwg26r0y" path="res://Health_progress.png" id="2_ee4bf"]
+[ext_resource type="Script" uid="uid://dthfjubueh2vo" path="res://HP_progress_bar.gd" id="2_qtu10"]
+[ext_resource type="Texture2D" uid="uid://bxf7lsvxgu7a2" path="res://o2Bar.png" id="4_kbped"]
+[ext_resource type="Texture2D" uid="uid://dy0ohgauxpk75" path="res://o2BarOver.png" id="5_fj5cn"]
+[ext_resource type="Script" uid="uid://mawtjinrjkv8" path="res://o2_progress_bar.gd" id="6_iy58a"]
+[ext_resource type="Texture2D" uid="uid://xn70rxo0737x" path="res://o2.png" id="7_iy58a"]
+
+[node name="Control" type="Control" unique_id=1370052875]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HPBar" type="TextureProgressBar" parent="." unique_id=65881139]
+layout_mode = 0
+offset_right = 810.0
+offset_bottom = 218.0
+texture_under = ExtResource("1_qtu10")
+texture_progress = ExtResource("2_ee4bf")
+texture_progress_offset = Vector2(59, 23)
+script = ExtResource("2_qtu10")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2130416975]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 8.0
+offset_right = 497.0
+offset_bottom = 52.0
+value = 40.0
+texture_under = ExtResource("4_kbped")
+texture_progress = ExtResource("5_fj5cn")
+texture_progress_offset = Vector2(1, 2)
+script = ExtResource("6_iy58a")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1009648427]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="O2" type="Sprite2D" parent="AspectRatioContainer" unique_id=47401108]
+position = Vector2(254, 52)
+scale = Vector2(0.2995992, 0.2995992)
+texture = ExtResource("7_iy58a")

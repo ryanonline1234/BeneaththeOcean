@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cso6qqbnd32yf"]
+
+[ext_resource type="Texture2D" uid="uid://j1cr735sig3l" path="res://boat.png" id="1_annr2"]
+[ext_resource type="Script" uid="uid://cgt1nx70g0q5v" path="res://boat.gd" id="2_viw7v"]
+[ext_resource type="Script" uid="uid://dpjw2dxb2pc48" path="res://boatCheck.gd" id="3_henu8"]
+[ext_resource type="Texture2D" uid="uid://dd4c8oy5gppk4" path="res://boatleft.png" id="4_1jsln"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_anwow"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_annr2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1jsln")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_viw7v"]
+size = Vector2(353.09277, 195.56706)
+
+[node name="Boat" type="AnimatedSprite2D" unique_id=2107864793]
+position = Vector2(3, -1.5258789e-05)
+scale = Vector2(0.388, 0.388)
+sprite_frames = SubResource("SpriteFrames_anwow")
+animation = &"left"
+script = ExtResource("2_viw7v")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=92883848]
+script = ExtResource("3_henu8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=886480543]
+position = Vector2(-9.02061, 87.78354)
+shape = SubResource("RectangleShape2D_viw7v")
+
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
